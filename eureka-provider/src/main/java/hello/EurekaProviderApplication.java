@@ -6,10 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,8 @@ public class EurekaProviderApplication {
 class ServiceInstanceRestController {
 
 
-    @GetMapping("/test")
-    public void test() {
-        System.out.print("invoked successfully");
+    @PostMapping("/test")
+    public void test(@RequestBody String name) {
+        System.out.print("invoked successfully"+name);
     }
 }
