@@ -1,5 +1,6 @@
 package hello;
 
+import hello.depends.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -25,9 +26,18 @@ class TestController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private TestService testService;
+
     @GetMapping("testinvoke")
     public List<ServiceInstance> serviceInstancesByApplicationName() {
         restTemplate.exchange("http://SERVICE-PROVIDER/test",HttpMethod.GET,null,String.class);
+        return null;
+    }
+
+    @GetMapping("invokedByFeign")
+    public List<ServiceInstance> invokeByFeign() {
+        testService.helloTest("kerry");
         return null;
     }
 
